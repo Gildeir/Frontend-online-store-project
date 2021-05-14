@@ -142,7 +142,9 @@ Este repositório **já conta com uma `main-group` para cada grupo**, identifica
 
 ## Data de entrega
 
-Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+Data de entrega para avaliação final do projeto: `26/05/2021 - 14:00h`.
+
+Serão 04 dias de projeto.
 
 ---
 
