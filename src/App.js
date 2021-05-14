@@ -8,11 +8,12 @@ function App() {
     <div>
       <header className="App-header">
         <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ Home } />    
-          {/* <Route component={ NotFound } /> */}
-        </Switch>
-      </BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+            <Route exact path="/ShoppingCart" component={ ShoppingCart } />
+            {/* <Route component={ NotFound } /> */}
+          </Switch>
+        </BrowserRouter>
       </header>
     </div>
   );
