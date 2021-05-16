@@ -24,7 +24,8 @@ export default class Categories extends Component {
     return (
       <div>
         <ul>
-          {categories.map((cat) => <li key={ cat.id }>{cat.name}</li>)}
+          {categories
+            .map((cat) => <li data-testid="category" key={ cat.id }>{cat.name}</li>)}
         </ul>
       </div>
     );
