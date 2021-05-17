@@ -24,10 +24,10 @@ export default class Categories extends Component {
           {categories
             .map((cat) => (
               <li
-                data-testid="category"
                 key={ cat.id }
               >
                 <input
+                  data-testid="category"
                   onClick={ handleClick }
                   value={ cat.name }
                   id={ cat.id }

@@ -11,15 +11,21 @@ export default class Home extends Component {
       searchField: '',
       products: [],
       category: '',
+      foo: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
   }
 
   componentDidUpdate() {
-    const { category } = this.state;
-    if (category) {
-      this.handleClick();
+    const { searchField, category, foo } = this.state;
+    if (foo === false) {
+      api.getProductsFromCategoryAndQuery(category, searchField).then((response) => {
+        this.setState({
+          products: response.results,
+          foo: true,
+        });
+      });
     }
   }
 
@@ -32,6 +38,7 @@ export default class Home extends Component {
   handleChangeCategory({ target: { id } }) {
     this.setState({
       category: id,
+      foo: false,
     });
   }
 
