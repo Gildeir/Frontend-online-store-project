@@ -5,7 +5,7 @@ import ProductList from './ProductList';
 
 export default class ElementsHome extends Component {
   render() {
-    const { products, handleChange, handleClick } = this.props;
+    const { products, handleChange, handleClick, handleClickAddCart, cart } = this.props;
     return (
       <div>
         <input
@@ -21,10 +21,16 @@ export default class ElementsHome extends Component {
           PESQUISAR
         </button>
         <button type="button">
-          <Link to="/shoppingcart" data-testid="shopping-cart-button">
+          <Link
+            to={ { pathname: '/shoppingcart', state: { cart } } }
+            data-testid="shopping-cart-button"
+          >
             <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
           </Link>
-          <ProductList products={ products } />
+          <ProductList
+            products={ products }
+            handleClickAddCart={ handleClickAddCart }
+          />
         </button>
       </div>
     );
@@ -35,4 +41,6 @@ ElementsHome.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleChange: PropTypes.func,
   handleClick: PropTypes.func,
+  handleClickAddCart: PropTypes.func,
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 }.isRequired;
