@@ -11,7 +11,7 @@ export default class Home extends Component {
       searchField: '',
       products: [],
       category: '',
-      cart:[],
+      cart: [],
     };
     this.handleClick = this.handleClick.bind(this);
   }

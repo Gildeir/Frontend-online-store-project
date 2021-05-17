@@ -32,10 +32,10 @@ export default class ShoppingCart extends Component {
           </div>
         ))}
         <button type="button">
-            <Link to="/">
-              Voltar
-            </Link>
-          </button>
+          <Link to="/">
+            Voltar
+          </Link>
+        </button>
       </div>
     );
   }
