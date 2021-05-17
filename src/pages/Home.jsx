@@ -13,12 +13,25 @@ export default class Home extends Component {
       category: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChangeCategory = this.handleChangeCategory.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.handleClick();
   }
 
   handleChange = ({ target: { value } }) => {
     this.setState({
       searchField: value,
     });
+  }
+
+  handleChangeCategory({ target: { id } }) {
+    this.setState({
+      category: id,
+    });
+
+    this.handleClick();
   }
 
   async handleClick() {
@@ -33,6 +46,7 @@ export default class Home extends Component {
     const { products } = this.state;
     return (
       <div>
+        <Categories handleClick={ this.handleChangeCategory } />
         <ElementsHome
           products={ products }
           handleChange={ this.handleChange }
@@ -41,7 +55,6 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <Categories />
       </div>
     );
   }
