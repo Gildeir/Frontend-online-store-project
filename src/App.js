@@ -2,15 +2,17 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
   return (
     <div>
-      <header className="App-header">
+      <header>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ Home } />
-            {/* <Route exact path="/ShoppingCart" component={ ShoppingCart } /> */}
+            <Route exact path="/shoppingcart" component={ ShoppingCart } />
+            {/* <Route path="/details/:id" component={ ProductDetails } /> */}
             {/* <Route component={ NotFound } /> */}
           </Switch>
         </BrowserRouter>
