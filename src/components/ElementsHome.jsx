@@ -24,7 +24,8 @@ export default class ElementsHome extends Component {
           <Link to="/shoppingcart" data-testid="shopping-cart-button">
             <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
           </Link>
-        <ProductList products={ products } />
+          <ProductList products={ products } />
+        </button>
       </div>
     );
   }
