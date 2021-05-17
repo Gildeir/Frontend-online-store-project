@@ -13,10 +13,10 @@ export default class ProductList extends Component {
               product={ product }
             />
             <button
-            type="button"
-            value={ product.id }
-            onClick={ () => handleClickAddCart(product) }
-            data-testid="product-add-to-cart"
+              type="button"
+              value={ product.id }
+              onClick={ () => handleClickAddCart(product) }
+              data-testid="product-add-to-cart"
             >
               Adicionar ao Carrinho
             </button>
