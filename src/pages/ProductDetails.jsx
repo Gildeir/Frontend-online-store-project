@@ -1,52 +1,38 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
 
-export default class ProductDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: [],
-      categoryId: '',
-    };
-    this.productRender = this.productRender.bind(this);
-  }
-
-  componentDidMount() {
-    this.productRender();
-  }
-
-  async productRender() {
-    const { id } = this.props.match.params;
-    const response = await fetch(`https://api.mercadolibre.com/items/${id}`)
-    const jsx = await response.json()
-    this.setState({
-      product: jsx,
-    });
-  }
-
+export default class ProductDetailss extends Component {
   render() {
-    const { product } = this.state;
-    const { title, thumbnail, price, attributes } = product;
-    // const {  } = attributes;
-
+    const { location: { state } } = this.props;
+    const { product } = state;
+    const { title, price, thumbnail } = product;
     return (
       <div>
-        <p data-testid="product-detail-name">
-          {`${title} - `}
-          {`R$ ${price}`}
-        </p>
-          <img src={thumbnail} alt={ title } />
-          { attributes.map((attribute) => (
-            <ul key={ attribute.id }>
-              <li>{ attribute }</li>
-            </ul>
-          )) }
-        { console.log(attributes) }
-        <button>
-          <Link to="/shopping"></Link>
+        <div>
+          <h3 data-testid="product-detail-name">{title}</h3>
+          <img src={ thumbnail } alt={ title } />
+          <h2>{`Preço: R$ ${price}`}</h2>
+        </div>
+        <button type="button">
+          <Link to="/">
+            Voltar
+          </Link>
         </button>
       </div>
     );
   }
 }
+
+ProductDetailss.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      product: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        thumbnail: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};
