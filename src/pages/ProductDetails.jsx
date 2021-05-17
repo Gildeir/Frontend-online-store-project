@@ -5,9 +5,10 @@ import * as api from '../services/api';
 export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
+    const { id } = this.props.match.params;
     this.state = {
       product: [],
-      categoryId: '',
+      categoryId: id,
     };
     this.productRender = this.productRender.bind(this);
   }
@@ -18,10 +19,11 @@ export default class ProductDetails extends Component {
 
   async productRender() {
     const { id } = this.props.match.params;
-    const response = await fetch(`https://api.mercadolibre.com/items/${id}`)
-    const jsx = await response.json()
+    const { product } = this.state;
+    // const response = await fetch(`https://api.mercadolibre.com/items/${id}`)
+    const response = await api.getProductsFromCategoryAndQuery(product, id)
     this.setState({
-      product: jsx,
+      product: response,
     });
   }
 
@@ -37,12 +39,12 @@ export default class ProductDetails extends Component {
           {`R$ ${price}`}
         </p>
           <img src={thumbnail} alt={ title } />
-          { attributes.map((attribute) => (
+          {/* { console.log(attributes) } */}
+          {/* { attributes[0][0].map((attribute) => (
             <ul key={ attribute.id }>
               <li>{ attribute }</li>
             </ul>
-          )) }
-        { console.log(attributes) }
+          )) } */}
         <button>
           <Link to="/shopping"></Link>
         </button>
