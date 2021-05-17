@@ -17,7 +17,10 @@ export default class Home extends Component {
   }
 
   componentDidUpdate() {
-    this.handleClick();
+    const { category } = this.state;
+    if (category) {
+      this.handleClick();
+    }
   }
 
   handleChange = ({ target: { value } }) => {
@@ -30,8 +33,6 @@ export default class Home extends Component {
     this.setState({
       category: id,
     });
-
-    this.handleClick();
   }
 
   async handleClick() {
