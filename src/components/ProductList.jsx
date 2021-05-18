@@ -4,13 +4,14 @@ import ProductCard from './ProductCard';
 
 export default class ProductList extends Component {
   render() {
-    const { products, handleClickAddCart } = this.props;
+    const { products, handleClickAddCart, cart } = this.props;
     return (
       <div>
         { products.map((product) => (
           <div key={ product.id }>
             <ProductCard
               product={ product }
+              cart={ cart }
             />
             <button
               type="button"

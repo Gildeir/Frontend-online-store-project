@@ -32,9 +32,6 @@ export default class ElementsHome extends Component {
           <ProductList
             products={ products }
             handleClickAddCart={ handleClickAddCart }
-          />
-          <ProductDetails
-            handleClickAddCart={ handleClickAddCart }
             cart={ cart }
           />
         </button>

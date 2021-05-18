@@ -6,12 +6,15 @@ import ElementsCard from '../components/ElementsCard';
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-
+    const { location: { state } } = this.props;
+    const { cart } = state;
+    
     this.state = {
-      quantity: 0,
+       quantity: 0,
+       shopcart: cart,
     };
   }
-
+  
   handlePlus = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
@@ -40,11 +43,19 @@ export default class ShoppingCart extends Component {
     }
   }
 
-  render() {
-    const { location: { state } } = this.props;
-    const { cart } = state;
+  handleRemove = (id) => {
+    const { shopcart } = this.state;
 
-    if (!cart.length) {
+    const updatedCart = shopcart.filter((Cart) => Cart.id !== id);
+    this.setState({
+      shopcart: updatedCart,
+    });
+  }
+
+  render() {
+    const { shopcart } = this.state;
+
+    if (!shopcart.length) {
       return (
         <div>
           <h3>Carrinho de Compras</h3>
@@ -60,12 +71,13 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { cart.map((Cart) => (
+        { shopcart.map((Cart) => (
           <div key={ Cart.id }>
             <ElementsCard
               data={ Cart }
               handlePlus={ this.handlePlus }
               handleDecrease={ this.handleDecrease }
+              handleRemove={ this.handleRemove }
             />
           </div>
         ))}

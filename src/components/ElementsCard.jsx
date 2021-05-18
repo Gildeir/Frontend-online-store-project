@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class ElementsCard extends Component {
   render() {
-    const { data, handlePlus, handleDecrease } = this.props;
+    const { data, handlePlus, handleDecrease, handleRemove } = this.props;
     const { id, title, count } = data;
 
     return (
@@ -29,6 +29,13 @@ export default class ElementsCard extends Component {
         >
           -
         </button>
+        <button
+          type="button"
+          value={ id }
+          onClick={ () => handleRemove(id) }
+        >
+          X
+        </button>
       </div>
     );
   }
@@ -42,4 +49,5 @@ ElementsCard.propTypes = {
   }).isRequired,
   handlePlus: PropTypes.func.isRequired,
   handleDecrease: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
 };

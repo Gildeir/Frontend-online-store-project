@@ -83,7 +83,6 @@ export default class Home extends Component {
     const { products, cart } = this.state;
     return (
       <div>
-        <Categories handleClick={ this.handleChangeCategory } />
         <ElementsHome
           products={ products }
           handleChange={ this.handleChange }
@@ -94,6 +93,7 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <Categories handleClick={ this.handleChangeCategory } />
       </div>
     );
   }
