@@ -5,15 +5,14 @@ import ElementsCard from '../components/ElementsCard';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
-    super(props)
-    
+    super(props);
+
     this.state = {
-       quantity: 0,
+      quantity: 0,
     };
-    this.handlePlus = this.handlePlus.bind(this);
   }
-  
-  handlePlus(id) {
+
+  handlePlus = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
 
