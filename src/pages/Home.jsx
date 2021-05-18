@@ -11,14 +11,38 @@ export default class Home extends Component {
       searchField: '',
       products: [],
       category: '',
+<<<<<<< HEAD
       cart: [],
+=======
+      foo: false,
+>>>>>>> f8c3f2107da67541eb4cff0da85d2d5183eaff43
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChangeCategory = this.handleChangeCategory.bind(this);
+  }
+
+  componentDidUpdate() {
+    const { searchField, category, foo } = this.state;
+    if (foo === false) {
+      api.getProductsFromCategoryAndQuery(category, searchField).then((response) => {
+        this.setState({
+          products: response.results,
+          foo: true,
+        });
+      });
+    }
   }
 
   handleChange = ({ target: { value } }) => {
     this.setState({
       searchField: value,
+    });
+  }
+
+  handleChangeCategory({ target: { id } }) {
+    this.setState({
+      category: id,
+      foo: false,
     });
   }
 
@@ -62,6 +86,7 @@ export default class Home extends Component {
     const { products, cart } = this.state;
     return (
       <div>
+        <Categories handleClick={ this.handleChangeCategory } />
         <ElementsHome
           products={ products }
           handleChange={ this.handleChange }
@@ -72,7 +97,6 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <Categories />
       </div>
     );
   }
