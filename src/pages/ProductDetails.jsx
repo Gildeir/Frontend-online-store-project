@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 export default class ProductDetails extends Component {
   render() {
     const { location: { state } } = this.props;
-    const { product, cart } = state;
+    const { product } = state;
     const { title, price, thumbnail } = product;
-    const { handleClickAddCart } = this.props;
+    const { cart, handleClickAddCart } = this.props;
     
     return (
       <div>

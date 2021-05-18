@@ -35,7 +35,7 @@ export default class ElementsHome extends Component {
           />
           <ProductDetails
             handleClickAddCart={ handleClickAddCart }
-            products={ products }
+            cart={ cart }
           />
         </button>
       </div>

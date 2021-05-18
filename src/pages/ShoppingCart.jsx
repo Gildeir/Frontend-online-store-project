@@ -10,7 +10,6 @@ export default class ShoppingCart extends Component {
     this.state = {
        quantity: 0,
     };
-    this.handlePlus = this.handlePlus.bind(this);
   }
   
   handlePlus(id) {
