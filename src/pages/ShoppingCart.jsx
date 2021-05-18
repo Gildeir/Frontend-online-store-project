@@ -26,7 +26,7 @@ export default class ShoppingCart extends Component {
     this.setState({
       quantity: productCart[key].count,
     });
-    usingQuantity();
+    this.usingQuantity();
   }
 
   handleDecrease = (id) => {
@@ -41,7 +41,7 @@ export default class ShoppingCart extends Component {
       this.setState({
         quantity: productCart[key].count,
       });
-      usingQuantity();
+      this.usingQuantity();
     }
   }
 
