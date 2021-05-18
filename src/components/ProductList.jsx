@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 
 export default class ProductList extends Component {
   render() {
-    const { products } = this.props;
+    const { products, handleClickAddCart } = this.props;
     return (
       <div>
         { products.map((product) => (
@@ -12,6 +12,14 @@ export default class ProductList extends Component {
             <ProductCard
               product={ product }
             />
+            <button
+              type="button"
+              value={ product.id }
+              onClick={ () => handleClickAddCart(product) }
+              data-testid="product-add-to-cart"
+            >
+              Adicionar ao Carrinho
+            </button>
           </div>
         )) }
       </div>
@@ -21,4 +29,5 @@ export default class ProductList extends Component {
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleClickAddCart: PropTypes.func.isRequired,
 };
