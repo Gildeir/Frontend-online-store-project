@@ -11,11 +11,8 @@ export default class Home extends Component {
       searchField: '',
       products: [],
       category: '',
-<<<<<<< HEAD
       cart: [],
-=======
       foo: false,
->>>>>>> f8c3f2107da67541eb4cff0da85d2d5183eaff43
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
