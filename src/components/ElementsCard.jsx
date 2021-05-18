@@ -20,6 +20,7 @@ export default class ElementsCard extends Component {
 
 ElementsCard.propTypes = {
   data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,
   }).isRequired,
