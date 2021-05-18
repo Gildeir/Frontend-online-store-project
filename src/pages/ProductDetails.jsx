@@ -8,13 +8,14 @@ constructor(props) {
 
   this.handleClickAddCart2 = this.handleClickAddCart2.bind(this)
 
-  this.state = {}
+  this.state = {
+    cart: [],
+  }
 }
   
 
   handleClickAddCart2 = (product) => {
-    const { location: { state } } = this.props;
-    const { cart } = state;
+    const { cart } = this.state;
     const haveCart = cart.length;
     if (!haveCart) {
       const { id, title } = product;
@@ -45,10 +46,19 @@ constructor(props) {
     const { location: { state } } = this.props;
     const { product } = state;
     const { title, price, thumbnail } = product;
+    const{ cart } = this.state;
     
     return (
       <div>
         <div>
+        <button type="button">
+          <Link
+            to={ { pathname: '/shoppingcart', state: { cart } } }
+            data-testid="shopping-cart-button"
+          >
+            <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
+          </Link>
+        </button>
           <h3 data-testid="product-detail-name">{title}</h3>
           <img src={ thumbnail } alt={ title } />
           <h2>{`Preço: R$ ${price}`}</h2>
@@ -57,7 +67,7 @@ constructor(props) {
           type="button"
           value={ product.id }
           onClick={ () => this.handleClickAddCart2(product) }
-          data-testid="product-add-to-cart"
+          data-testid="product-detail-add-to-cart"
         >
           Adicionar ao Carrinho
             </button>
