@@ -8,13 +8,13 @@ export default class ShoppingCart extends Component {
     super(props);
     const { location: { state } } = this.props;
     const { cart } = state;
-    
+
     this.state = {
-       quantity: 0,
-       shopcart: cart,
+      quantity: 0,
+      shopcart: cart,
     };
   }
-  
+
   handlePlus = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
@@ -26,6 +26,7 @@ export default class ShoppingCart extends Component {
     this.setState({
       quantity: productCart[key].count,
     });
+    usingQuantity();
   }
 
   handleDecrease = (id) => {
@@ -40,6 +41,7 @@ export default class ShoppingCart extends Component {
       this.setState({
         quantity: productCart[key].count,
       });
+      usingQuantity();
     }
   }
 
@@ -50,6 +52,12 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: updatedCart,
     });
+  }
+
+  usingQuantity = () => {
+    const { quantity } = this.state;
+    const quantityState = quantity;
+    console.log(quantityState);
   }
 
   render() {
