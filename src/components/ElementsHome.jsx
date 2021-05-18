@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+// import Categories from './Categories';
 import ProductList from './ProductList';
 
 export default class ElementsHome extends Component {
