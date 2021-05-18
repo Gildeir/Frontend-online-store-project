@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 export default class ElementsCard extends Component {
   render() {
-    const { data } = this.props;
-    const { title, count } = data;
+    const { data, handlePlus } = this.props;
+    const { id, title, count } = data;
 
     return (
       <div>
@@ -13,6 +13,14 @@ export default class ElementsCard extends Component {
           Quantidade:
           { count }
         </p>
+        <button
+          type="button"
+          value={ id }
+          onClick={ () => handlePlus(id) }
+          data-testid="product-increase-quantity"
+        >
+          +
+        </button>
       </div>
     );
   }
@@ -24,4 +32,5 @@ ElementsCard.propTypes = {
     title: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,
   }).isRequired,
+  handlePlus: PropTypes.func.isRequired,
 };

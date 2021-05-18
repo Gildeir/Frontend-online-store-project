@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import Categories from './Categories';
 import ProductList from './ProductList';
+import ProductDetails from '../pages/ProductDetails';
 
 export default class ElementsHome extends Component {
   render() {
@@ -31,6 +32,10 @@ export default class ElementsHome extends Component {
           <ProductList
             products={ products }
             handleClickAddCart={ handleClickAddCart }
+          />
+          <ProductDetails
+            handleClickAddCart={ handleClickAddCart }
+            products={ products }
           />
         </button>
       </div>

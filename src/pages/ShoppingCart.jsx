@@ -4,6 +4,43 @@ import { Link } from 'react-router-dom';
 import ElementsCard from '../components/ElementsCard';
 
 export default class ShoppingCart extends Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+       quantity: 0,
+    };
+    this.handlePlus = this.handlePlus.bind(this);
+  }
+  
+  handlePlus(id) {
+    const { location: { state } } = this.props;
+    const { cart } = state;
+
+    const productCart = cart;
+    const findProduct = productCart.find((data) => data.id === id);
+    const key = productCart.indexOf(findProduct);
+    productCart[key].count += 1;
+    this.setState({
+      quantity: productCart[key].count,
+    });
+  }
+
+  handleDecrease = (id) => {
+    const { location: { state } } = this.props;
+    const { cart } = state;
+
+    const productCart = cart;
+    const findProduct = productCart.find((data) => data.id === id);
+    const key = productCart.indexOf(findProduct);
+    if (productCart[key].count > 1) {
+      productCart[key].count -= 1;
+      this.setState({
+        quantity: productCart[key].count,
+      });
+    }
+  }
+
   render() {
     const { location: { state } } = this.props;
     const { cart } = state;
@@ -28,6 +65,8 @@ export default class ShoppingCart extends Component {
           <div key={ Cart.id }>
             <ElementsCard
               data={ Cart }
+              handlePlus={ this.handlePlus }
+              handleDecrease={ this.handleDecrease }
             />
           </div>
         ))}

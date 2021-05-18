@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 export default class ProductDetails extends Component {
   render() {
     const { location: { state } } = this.props;
-    const { product } = state;
+    const { product, cart } = state;
     const { title, price, thumbnail } = product;
+    const { handleClickAddCart } = this.props;
+    
     return (
       <div>
         <div>
@@ -14,6 +16,15 @@ export default class ProductDetails extends Component {
           <img src={ thumbnail } alt={ title } />
           <h2>{`Preço: R$ ${price}`}</h2>
         </div>
+        <button type="button">
+          <Link
+            to={ { pathname: '/shoppingcart', state: { cart } } }
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => handleClickAddCart(product) }
+          >
+            <p>ADICIONAR AO CARRINHO</p>
+          </Link>
+        </button>
         <button type="button">
           <Link to="/">
             Voltar
