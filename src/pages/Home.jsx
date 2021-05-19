@@ -55,8 +55,8 @@ export default class Home extends Component {
     const { cart } = this.state;
     const haveCart = cart.length;
     if (!haveCart) {
-      const { id, title } = product;
-      const productCart = [{ id, title, count: 1 }];
+      const { id, title, price, thumbnail } = product;
+      const productCart = [{ id, title, price, thumbnail, count: 1 }];
       this.setState({
         cart: productCart,
       });
@@ -70,8 +70,8 @@ export default class Home extends Component {
           cart: productCart,
         });
       } else {
-        const { id, title } = product;
-        productCart = [...productCart, { id, title, count: 1 }];
+        const { id, title, price, thumbnail } = product;
+        productCart = [...productCart, { id, title, price, thumbnail, count: 1 }];
         this.setState({
           cart: productCart,
         });

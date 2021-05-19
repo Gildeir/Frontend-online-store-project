@@ -94,8 +94,11 @@ export default class ShoppingCart extends Component {
             Voltar
           </Link>
         </button>
-        <button type="button" data-testid="checkout-products">
-          <Link to="/checkout">
+        <button 
+          type="button" 
+          data-testid="checkout-products"
+        >
+          <Link to={ { pathname: '/checkout', state: { shopcart } } }>
             Finalizar a compra
           </Link>
         </button>

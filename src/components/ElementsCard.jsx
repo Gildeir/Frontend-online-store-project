@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class ElementsCard extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {}
+  }
+  
   render() {
     const { data, handlePlus, handleDecrease, handleRemove } = this.props;
-    const { id, title, count } = data;
+    const { id, title, price, count } = data;
 
     return (
       <div>
@@ -12,6 +18,14 @@ export default class ElementsCard extends Component {
         <p data-testid="shopping-cart-product-quantity">
           Quantidade:
           { count }
+        </p>
+        <p>
+          Valor Unit:
+          { price }
+        </p>
+        <p>
+          Valor Total:
+          { Math.round((count * price) * 100) / 100 }
         </p>
         <button
           type="button"
@@ -46,6 +60,7 @@ ElementsCard.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
   handlePlus: PropTypes.func.isRequired,
   handleDecrease: PropTypes.func.isRequired,
