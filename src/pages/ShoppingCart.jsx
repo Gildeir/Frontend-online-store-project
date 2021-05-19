@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ElementsCard from '../components/ElementsCard';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -79,14 +78,49 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { shopcart.map((Cart) => (
-          <div key={ Cart.id }>
-            <ElementsCard
-              data={ Cart }
-              handlePlus={ this.handlePlus }
-              handleDecrease={ this.handleDecrease }
-              handleRemove={ this.handleRemove }
-            />
+        { shopcart.map(({ title, count, id, price, totalValue }) => (
+          <div key={ id }>
+            <div>
+              <h4 data-testid="shopping-cart-product-name">{ title }</h4>
+              <p data-testid="shopping-cart-product-quantity">
+                Quantidade:
+                { count }
+              </p>
+              <p>
+                Valor Unit:
+                { price }
+              </p>
+              <p>
+                Valor Total:
+                { const totalProduct = Math.round((count * price) * 100) / 100
+                this.setState({
+                    totalValue: totalProduct,
+                }) }
+              </p>
+              <button
+                type="button"
+                value={ id }
+                onClick={ () => this.handlePlus(id) }
+                data-testid="product-increase-quantity"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                value={ id }
+                onClick={ () => this.handleDecrease(id) }
+                data-testid="product-decrease-quantity"
+              >
+                -
+              </button>
+              <button
+                type="button"
+                value={ id }
+                onClick={ () => this.handleRemove(id) }
+              >
+                X
+              </button>
+            </div>
           </div>
         ))}
         <button type="button">
