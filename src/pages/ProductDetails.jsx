@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import FormComents from '../components/FormComents';
+import RenderComents from '../components/RenderComents';
 
 export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
-
-    this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
-
     this.state = {
+      newComent: {},
+      coments: [],
       cart: [],
     };
+    this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
   }
 
+  // Comments:
+  handleComents = (newComents) => {
+    this.setState({ newComent: newComents });
+    this.handleAddComents();
+    const { coments } = this.state;
+    localStorage.setItem('Coments', { coments });
+  }
+
+  handleAddComents = () => {
+    this.setState(({ newComent, coments }) => ({ coments: [...coments, newComent] }));
+  }
+
+  // Add product to cart:
   handleClickAddCart2 = (product) => {
     const { cart } = this.state;
     const haveCart = cart.length;
@@ -42,6 +57,7 @@ export default class ProductDetails extends Component {
   }
 
   render() {
+    const { coments } = this.state;
     const { location: { state } } = this.props;
     const { product } = state;
     const { title, price, thumbnail } = product;
@@ -75,6 +91,12 @@ export default class ProductDetails extends Component {
             Voltar
           </Link>
         </button>
+        <FormComents
+          handleComents={ this.handleComents }
+        />
+        <div>
+          {coments.map((coment, id) => <RenderComents key={ id } coment={ coment } />)}
+        </div>
       </div>
     );
   }
