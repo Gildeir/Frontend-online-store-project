@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Checkout extends Component {
   render() {
@@ -7,8 +8,8 @@ export default class Checkout extends Component {
 
     return (
       <div>
-        { shopcart.map(({ thumbnail, title, price }) => (
-        <div>
+        { shopcart.map(({ id, thumbnail, title, price }) => (
+        <div key={ id }>
           <img src={ thumbnail } alt={ title }/>
           <p>{ title }</p>
           <p>{ `R$: ${ price }` }</p>
@@ -45,7 +46,20 @@ export default class Checkout extends Component {
             placeholder="Endereço"
             data-testid="checkout-address"
           />
+          <fieldset>
+            <legend>Método de pagamento</legend>
+            <label htmlFor="boleto">Boleto</label>
+            <input type="radio" name="boleto"/>
+            <label htmlFor="cartao">Cartão de crédito</label>
+            <input type="radio" name="cartao">Visa</input>
+            <input type="radio" name="cartao">MasterCard</input>
+            <input type="radio" name="cartao">Elo</input>
+          </fieldset>
         </form>
+        <button>
+          <Link to="/">COMPRAR
+          </Link>
+        </button>
       </div>
     );
   }

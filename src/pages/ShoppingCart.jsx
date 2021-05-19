@@ -92,10 +92,7 @@ export default class ShoppingCart extends Component {
               </p>
               <p>
                 Valor Total:
-                { const totalProduct = Math.round((count * price) * 100) / 100
-                this.setState({
-                    totalValue: totalProduct,
-                }) }
+                { Math.round((count * price) * 100) / 100 }
               </p>
               <button
                 type="button"
