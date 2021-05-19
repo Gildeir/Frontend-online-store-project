@@ -4,11 +4,66 @@ import { Link } from 'react-router-dom';
 import ElementsCard from '../components/ElementsCard';
 
 export default class ShoppingCart extends Component {
-  render() {
+  constructor(props) {
+    super(props);
     const { location: { state } } = this.props;
     const { cart } = state;
 
-    if (!cart.length) {
+    this.state = {
+      quantity: 0,
+      shopcart: cart,
+    };
+  }
+
+  handlePlus = (id) => {
+    const { location: { state } } = this.props;
+    const { cart } = state;
+
+    const productCart = cart;
+    const findProduct = productCart.find((data) => data.id === id);
+    const key = productCart.indexOf(findProduct);
+    productCart[key].count += 1;
+    this.setState({
+      quantity: productCart[key].count,
+    });
+    this.usingQuantity();
+  }
+
+  handleDecrease = (id) => {
+    const { location: { state } } = this.props;
+    const { cart } = state;
+
+    const productCart = cart;
+    const findProduct = productCart.find((data) => data.id === id);
+    const key = productCart.indexOf(findProduct);
+    if (productCart[key].count > 1) {
+      productCart[key].count -= 1;
+      this.setState({
+        quantity: productCart[key].count,
+      });
+      this.usingQuantity();
+    }
+  }
+
+  handleRemove = (id) => {
+    const { shopcart } = this.state;
+
+    const updatedCart = shopcart.filter((Cart) => Cart.id !== id);
+    this.setState({
+      shopcart: updatedCart,
+    });
+  }
+
+  usingQuantity = () => {
+    const { quantity } = this.state;
+    const quantityState = quantity;
+    console.log(quantityState);
+  }
+
+  render() {
+    const { shopcart } = this.state;
+
+    if (!shopcart.length) {
       return (
         <div>
           <h3>Carrinho de Compras</h3>
@@ -24,10 +79,13 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { cart.map((Cart) => (
+        { shopcart.map((Cart) => (
           <div key={ Cart.id }>
             <ElementsCard
               data={ Cart }
+              handlePlus={ this.handlePlus }
+              handleDecrease={ this.handleDecrease }
+              handleRemove={ this.handleRemove }
             />
           </div>
         ))}
