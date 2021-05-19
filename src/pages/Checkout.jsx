@@ -46,15 +46,25 @@ export default class Checkout extends Component {
             placeholder="Endereço"
             data-testid="checkout-address"
           />
-          <fieldset>
-            <legend>Método de pagamento</legend>
-            <label htmlFor="boleto">Boleto</label>
-            <input type="radio" name="boleto"/>
-            <label htmlFor="cartao">Cartão de crédito</label>
-            <input type="radio" name="cartao">Visa</input>
-            <input type="radio" name="cartao">MasterCard</input>
-            <input type="radio" name="cartao">Elo</input>
-          </fieldset>
+          <form>
+            <p>Boleto</p>
+            <input 
+              type="radio" 
+              name="boleto"
+            />Boleto
+            <input 
+              type="radio" 
+              name="cartao"
+            />Visa
+            <input
+              type="radio" 
+              name="cartao"
+            />MasterCard
+            <input 
+              type="radio" 
+              name="cartao"
+            />Elo
+          </form>
         </form>
         <button>
           <Link to="/">COMPRAR

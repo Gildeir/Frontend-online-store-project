@@ -53,9 +53,17 @@ export default class ShoppingCart extends Component {
     });
   }
 
-  // updatedShopCartValue = () => {
+  updatedShopCartValue = (id, newValue) => {
+    const { shopcart } = this.state;
 
-  // }
+    const productCart = shopcart;
+    const findProduct = productCart.find((data) => data.id === id);
+    const key = productCart.indexOf(findProduct);
+    productCart[key].totalValue = newValue;
+    this.setState({
+      totalValue: productCart[key].totalValue,
+    });
+  }
 
   usingQuantity = () => {
     const { quantity } = this.state;
@@ -82,7 +90,7 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { shopcart.map(({ title, count, id, price, totalValue }) => (
+        { shopcart.map(({ title, count, id, price }) => (
           <div key={ id }>
             <div>
               <h4 data-testid="shopping-cart-product-name">{ title }</h4>
@@ -97,7 +105,8 @@ export default class ShoppingCart extends Component {
               <p>
                 Valor Total:
                 { Math.round((count * price) * 100) / 100 }
-                {/* { this.updatedShopCartValue() } */}
+                { this.updatedShopCartValue(id, Math.round((count * price) * 100) / 100 ) }
+                { console.log(this.updatedShopCartValue()) }
               </p>
               <button
                 type="button"
