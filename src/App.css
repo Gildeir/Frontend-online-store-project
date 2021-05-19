@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.stars-rating {
+  display: flex;
+}
+
+.star {
+  width: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
