@@ -27,12 +27,12 @@ export default class ElementsHome extends Component {
           >
             <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
           </Link>
+          </button>
           <ProductList
             products={ products }
             handleClickAddCart={ handleClickAddCart }
             cart={ cart }
           />
-        </button>
       </div>
     );
   }
