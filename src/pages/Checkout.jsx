@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class Checkout extends Component {
 
@@ -10,7 +12,7 @@ export default class Checkout extends Component {
       <div>
         { shopcart.map(({ id, thumbnail, title, price }) => (
           <div key={ id }>
-            <img src={ thumbnail } alt={ title } />
+            <img src={ thumbnail } alt={ title }/>
             <p>{ title }</p>
             <p>{ `R$: ${price}` }</p>
           </div>
@@ -46,8 +48,46 @@ export default class Checkout extends Component {
             placeholder="Endereço"
             data-testid="checkout-address"
           />
+          <form>
+            <p>Boleto</p>
+            <input
+              type="radio"
+              name="boleto"
+            />
+            Boleto
+            <input
+              type="radio"
+              name="cartao"
+            />
+            Visa
+            <input
+              type="radio"
+              name="cartao"
+            />
+            MasterCard
+            <input
+              type="radio"
+              name="cartao"
+            />
+            Elo
+          </form>
         </form>
+        <button>
+          <Link
+            to="/"
+          >
+          COMPRAR
+         </Link>
+        </button>
       </div>
     );
   }
 }
+
+Checkout.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      shopcart: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }).isRequired,
+  }).isRequired,
+};

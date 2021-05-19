@@ -9,7 +9,6 @@ export default class ShoppingCart extends Component {
     const { cart } = state;
 
     this.state = {
-      quantity: 0,
       shopcart: cart,
     };
   }
@@ -22,10 +21,11 @@ export default class ShoppingCart extends Component {
     const findProduct = productCart.find((data) => data.id === id);
     const key = productCart.indexOf(findProduct);
     productCart[key].count += 1;
+    productCart[key].totalValue = Math.round((productCart[key].count
+    * productCart[key].price) * 100) / 100;
     this.setState({
-      quantity: productCart[key].count,
+      shopcart: productCart,
     });
-    this.usingQuantity();
   }
 
   handleDecrease = (id) => {
@@ -37,10 +37,11 @@ export default class ShoppingCart extends Component {
     const key = productCart.indexOf(findProduct);
     if (productCart[key].count > 1) {
       productCart[key].count -= 1;
+      productCart[key].totalValue = Math.round((productCart[key].count
+      * productCart[key].price) * 100) / 100;
       this.setState({
-        quantity: productCart[key].count,
+        shopcart: productCart,
       });
-      this.usingQuantity();
     }
   }
 
@@ -51,16 +52,6 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: updatedCart,
     });
-  }
-
-  updatedShopCartValue = () => {
-
-  }
-
-  usingQuantity = () => {
-    const { quantity } = this.state;
-    const quantityState = quantity;
-    console.log(quantityState);
   }
 
   render() {
@@ -96,8 +87,8 @@ export default class ShoppingCart extends Component {
               </p>
               <p>
                 Valor Total:
-                { Math.round((count * price) * 100) / 100 }
-                { this.updatedShopCartValue() }
+                {/* { Math.round((count * price) * 100) / 100 } */}
+                { (totalValue === 0) ? price : totalValue }
               </p>
               <button
                 type="button"
