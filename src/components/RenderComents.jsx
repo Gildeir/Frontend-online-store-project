@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class RenderComents extends Component {
   render() {
@@ -11,3 +12,10 @@ export default class RenderComents extends Component {
     );
   }
 }
+
+RenderComents.propTypes = {
+  coment: PropTypes.shape({
+    email: PropTypes.string,
+    mensagem: PropTypes.string,
+  }).isRequired,
+};
