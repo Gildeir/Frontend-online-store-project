@@ -53,6 +53,10 @@ export default class ShoppingCart extends Component {
     });
   }
 
+  // updatedShopCartValue = () => {
+
+  // }
+
   usingQuantity = () => {
     const { quantity } = this.state;
     const quantityState = quantity;
@@ -93,6 +97,7 @@ export default class ShoppingCart extends Component {
               <p>
                 Valor Total:
                 { Math.round((count * price) * 100) / 100 }
+                {/* { this.updatedShopCartValue() } */}
               </p>
               <button
                 type="button"
