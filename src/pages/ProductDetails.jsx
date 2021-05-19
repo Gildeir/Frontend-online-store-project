@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class ProductDetails extends Component {
-constructor(props) {
-  super(props)
+  constructor(props) {
+    super(props);
 
-  this.handleClickAddCart2 = this.handleClickAddCart2.bind(this)
+    this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
 
-  this.state = {
-    cart: [],
+    this.state = {
+      cart: [],
+    };
   }
-}
-  
 
   handleClickAddCart2 = (product) => {
     const { cart } = this.state;
@@ -46,19 +45,19 @@ constructor(props) {
     const { location: { state } } = this.props;
     const { product } = state;
     const { title, price, thumbnail } = product;
-    const{ cart } = this.state;
-    
+    const { cart } = this.state;
+
     return (
       <div>
         <div>
-        <button type="button">
-          <Link
-            to={ { pathname: '/shoppingcart', state: { cart } } }
-            data-testid="shopping-cart-button"
-          >
-            <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
-          </Link>
-        </button>
+          <button type="button">
+            <Link
+              to={ { pathname: '/shoppingcart', state: { cart } } }
+              data-testid="shopping-cart-button"
+            >
+              <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
+            </Link>
+          </button>
           <h3 data-testid="product-detail-name">{title}</h3>
           <img src={ thumbnail } alt={ title } />
           <h2>{`Preço: R$ ${price}`}</h2>
@@ -70,7 +69,7 @@ constructor(props) {
           data-testid="product-detail-add-to-cart"
         >
           Adicionar ao Carrinho
-            </button>
+        </button>
         <button type="button">
           <Link to="/">
             Voltar
