@@ -15,6 +15,7 @@ export default class ProductDetails extends Component {
     this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
   }
 
+  // Comments:
   handleComents = (newComents) => {
     this.setState({ newComent: newComents });
     this.handleAddComents();
@@ -26,6 +27,7 @@ export default class ProductDetails extends Component {
     this.setState(({ newComent, coments }) => ({ coments: [...coments, newComent] }));
   }
 
+  // Add product to cart:
   handleClickAddCart2 = (product) => {
     const { cart } = this.state;
     const haveCart = cart.length;
@@ -89,7 +91,9 @@ export default class ProductDetails extends Component {
             Voltar
           </Link>
         </button>
-        <FormComents handleComents={ this.handleComents } />
+        <FormComents
+          handleComents={ this.handleComents }
+        />
         <div>
           {coments.map((coment, id) => <RenderComents key={ id } coment={ coment } />)}
         </div>
