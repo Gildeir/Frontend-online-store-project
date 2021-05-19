@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 
 export default class Checkout extends Component {
+
   render() {
     const { location: { state } } = this.props;
     const { shopcart } = state;
 
     return (
       <div>
-        { shopcart.map(({ thumbnail, title, price }) => (
-        <div>
-          <img src={ thumbnail } alt={ title }/>
-          <p>{ title }</p>
-          <p>{ `R$: ${ price }` }</p>
-        </div>
+        { shopcart.map(({ id, thumbnail, title, price }) => (
+          <div key={ id }>
+            <img src={ thumbnail } alt={ title } />
+            <p>{ title }</p>
+            <p>{ `R$: ${price}` }</p>
+          </div>
         )) }
         <form>
           <input
