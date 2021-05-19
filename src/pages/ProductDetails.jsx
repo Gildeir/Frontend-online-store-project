@@ -14,19 +14,14 @@ export default class ProductDetails extends Component {
   }
 
   handleComents = (newComents) => {
-    const { coments, newComent } = this.state;
-    if (coments.length !== 0) {
-      this.handleAddComents(newComent);
-    }
     this.setState({ newComent: newComents });
-    // const {  } = this.state;
-    this.setState({ coments: [newComent] });
-
-    // console.log(coments)
+    this.handleAddComents();
+    const { coments } = this.state;
+    localStorage.setItem('Coments', { coments });
   }
 
   handleAddComents = () => {
-    this.setState(({ newComent }) => ({ coments: [...newComent] }));
+    this.setState(({ newComent, coments }) => ({ coments: [...coments, newComent] }));
   }
 
   render() {
