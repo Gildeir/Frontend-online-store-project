@@ -7,16 +7,20 @@ export default class Checkout extends Component {
   render() {
     const { location: { state } } = this.props;
     const { shopcart } = state;
+    const val = shopcart.reduce((acc, value) => acc.totalValue + value.totalValue)
+    console.log(val)
 
     return (
       <div>
-        { shopcart.map(({ id, thumbnail, title, price }) => (
+        { shopcart.map(({ id, thumbnail, title, totalValue, count }) => (
           <div key={ id }>
             <img src={ thumbnail } alt={ title }/>
             <p>{ title }</p>
-            <p>{ `R$: ${price}` }</p>
+            <p>{ `Quantidade: ${ count }` }</p>
+            <p>{ `R$: ${ totalValue }` }</p>
           </div>
         )) }
+        <p>{ `VALOR TOTAL DO PRODUTOS: R$ ${val}` }</p>
         <form>
           <input
             type="text"

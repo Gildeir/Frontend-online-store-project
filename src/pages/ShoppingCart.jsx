@@ -87,7 +87,6 @@ export default class ShoppingCart extends Component {
               </p>
               <p>
                 Valor Total:
-                {/* { Math.round((count * price) * 100) / 100 } */}
                 { (totalValue === 0) ? price : totalValue }
               </p>
               <button
