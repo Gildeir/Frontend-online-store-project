@@ -43,6 +43,8 @@ export default class ProductDetails extends Component {
       if (findProduct) {
         const key = productCart.indexOf(findProduct);
         productCart[key].count += 1;
+        productCart[key].totalValue = Math.round((productCart[key].count
+          * productCart[key].price) * 100) / 100;
         this.setState({
           cart: productCart,
         });

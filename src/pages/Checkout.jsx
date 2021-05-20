@@ -6,21 +6,26 @@ export default class Checkout extends Component {
 
   render() {
     const { location: { state } } = this.props;
-    const { shopcart } = state;
-    const val = shopcart.reduce((acc, value) => acc.totalValue + value.totalValue);
-    console.log(val)
+    const { shopcart, totalSum } = state;
 
     return (
       <div>
+        <h2>Resumo da Compra</h2>
         { shopcart.map(({ id, thumbnail, title, totalValue, count }) => (
           <div key={ id }>
-            <img src={ thumbnail } alt={ title }/>
+            <img src={ thumbnail } alt={ title } />
             <p>{ title }</p>
-            <p>{ `Quantidade: ${ count }` }</p>
-            <p>{ `R$: ${ totalValue }` }</p>
+            <p>{ `Quantidade: ${count}` }</p>
+            <p>{ `Preço R$: ${totalValue}` }</p>
           </div>
         )) }
-        <p>{ `VALOR TOTAL DO PRODUTOS: R$ ${val}` }</p>
+        <p>
+          <strong>
+            { `VALOR TOTAL DO PRODUTOS: R$ ${totalSum}` }
+          </strong>
+        </p>
+        <br />
+        <h2>Informações do comprador</h2>
         <form>
           <input
             type="text"
@@ -76,12 +81,14 @@ export default class Checkout extends Component {
             Elo
           </form>
         </form>
-        <button>
+        <button
+          type="button"
+        >
           <Link
             to="/"
           >
-          COMPRAR
-         </Link>
+            COMPRAR
+          </Link>
         </button>
       </div>
     );
@@ -92,6 +99,7 @@ Checkout.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       shopcart: PropTypes.arrayOf(PropTypes.object).isRequired,
+      totalSum: PropTypes.arrayOf(PropTypes.object).isRequired,
     }).isRequired,
   }).isRequired,
 };

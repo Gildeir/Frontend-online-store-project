@@ -10,17 +10,17 @@ export default class ProductCard extends Component {
     if (shipping.free_shipping) {
       return (
         <div data-testid="product">
-        <h3>{ title }</h3>
-        <p>Produto com frete grátis</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
-        <Link
-          data-testid="product-detail-link"
-          to={ { pathname: `/details/${id}`, state: { product } } }
-        >
-          VER DETALHES
-        </Link>
-      </div>
+          <h3>{ title }</h3>
+          <p>Produto com frete grátis</p>
+          <img src={ thumbnail } alt={ title } />
+          <p>{ price }</p>
+          <Link
+            data-testid="product-detail-link"
+            to={ { pathname: `/details/${id}`, state: { product } } }
+          >
+            VER DETALHES
+          </Link>
+        </div>
       );
     }
 
@@ -46,5 +46,8 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }).isRequired,
   }).isRequired,
 };
