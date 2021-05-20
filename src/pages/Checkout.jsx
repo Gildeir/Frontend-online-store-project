@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class Checkout extends Component {
-
   render() {
     const { location: { state } } = this.props;
     const { shopcart, totalSum } = state;

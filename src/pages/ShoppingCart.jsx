@@ -121,7 +121,7 @@ export default class ShoppingCart extends Component {
               </p>
               <button
                 id="increase"
-                disabled={ count >= availableQuantity ? true : false }
+                disabled={ count >= availableQuantity }
                 type="button"
                 value={ id }
                 onClick={ () => this.handleIncrease(id) }
