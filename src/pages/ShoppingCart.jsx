@@ -103,11 +103,11 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { shopcart.map(({ title, count, id, price, totalValue }) => (
+        { shopcart.map(({ title, count, id, price, totalValue, availableQuantity }) => (
           <div key={ id }>
             <div>
               <h4 data-testid="shopping-cart-product-name">{ title }</h4>
-              <p id="quantity" data-testid="shopping-cart-product-quantity">
+              <p data-testid="shopping-cart-product-quantity">
                 Quantidade:
                 { count }
               </p>
@@ -121,6 +121,7 @@ export default class ShoppingCart extends Component {
               </p>
               <button
                 id="increase"
+                disabled={ count >= availableQuantity ? true : false }
                 type="button"
                 value={ id }
                 onClick={ () => this.handleIncrease(id) }
