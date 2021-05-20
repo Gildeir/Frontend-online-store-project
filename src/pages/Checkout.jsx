@@ -7,7 +7,7 @@ export default class Checkout extends Component {
   render() {
     const { location: { state } } = this.props;
     const { shopcart } = state;
-    const val = shopcart.reduce((acc, value) => acc.totalValue + value.totalValue)
+    const val = shopcart.reduce((acc, value) => acc.totalValue + value.totalValue);
     console.log(val)
 
     return (
