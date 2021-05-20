@@ -81,12 +81,14 @@ export default class Checkout extends Component {
             Elo
           </form>
         </form>
-        <button>
+        <button
+          type="button"
+        >
           <Link
             to="/"
           >
-          COMPRAR
-         </Link>
+            COMPRAR
+          </Link>
         </button>
       </div>
     );
