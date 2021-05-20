@@ -7,6 +7,23 @@ export default class ProductCard extends Component {
     const { product } = this.props;
     const { id, title, thumbnail, price, shipping: { free_shipping } } = product;
 
+    if (free_shipping) {
+      return (
+        <div data-testid="product">
+        <h3>{ title }</h3>
+        <p>Produto com frete grátis</p>
+        <img src={ thumbnail } alt={ title } />
+        <p>{ price }</p>
+        <Link
+          data-testid="product-detail-link"
+          to={ { pathname: `/details/${id}`, state: { product } } }
+        >
+          VER DETALHES
+        </Link>
+      </div>
+      );
+    }
+
     return (
       <div data-testid="product">
         <h3>{ title }</h3>
