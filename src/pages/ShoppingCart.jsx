@@ -37,7 +37,7 @@ export default class ShoppingCart extends Component {
     });
   }
 
-  handlePlus = (id) => {
+  handleIncrease = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
 
@@ -122,7 +122,7 @@ export default class ShoppingCart extends Component {
               <button
                 type="button"
                 value={ id }
-                onClick={ () => this.handlePlus(id) }
+                onClick={ () => this.handleIncrease(id) }
                 data-testid="product-increase-quantity"
               >
                 +
