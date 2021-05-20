@@ -32,8 +32,9 @@ export default class ProductDetails extends Component {
     const { cart } = this.state;
     const haveCart = cart.length;
     if (!haveCart) {
-      const { id, title, price, thumbnail, available_quantity } = product;
-      const productCart = [{ id, title, price, thumbnail, available_quantity, count: 1, totalValue: price }];
+      const availableQuantity = product.available_quantity;
+      const productCart = [{
+        id, title, price, thumbnail, availableQuantity, count: 1, totalValue: price }];
       this.setState({
         cart: productCart,
       });
@@ -49,8 +50,10 @@ export default class ProductDetails extends Component {
           cart: productCart,
         });
       } else {
-        const { id, title, price, thumbnail, available_quantity } = product;
-        productCart = [...productCart, { id, title, price, thumbnail, available_quantity, count: 1, totalValue: price }];
+        const availableQuantity = product.available_quantity;
+        productCart = [...productCart,
+          { id, title, price, thumbnail, availableQuantity, count: 1, totalValue: price },
+        ];
         this.setState({
           cart: productCart,
         });
