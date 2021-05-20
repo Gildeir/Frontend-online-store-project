@@ -107,7 +107,7 @@ export default class ShoppingCart extends Component {
           <div key={ id }>
             <div>
               <h4 data-testid="shopping-cart-product-name">{ title }</h4>
-              <p data-testid="shopping-cart-product-quantity">
+              <p id="quantity" data-testid="shopping-cart-product-quantity">
                 Quantidade:
                 { count }
               </p>
@@ -120,6 +120,7 @@ export default class ShoppingCart extends Component {
                 { (totalValue === 0) ? price : totalValue }
               </p>
               <button
+                id="increase"
                 type="button"
                 value={ id }
                 onClick={ () => this.handleIncrease(id) }
