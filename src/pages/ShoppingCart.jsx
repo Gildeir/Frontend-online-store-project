@@ -10,6 +10,7 @@ export default class ShoppingCart extends Component {
 
     this.state = {
       shopcart: cart,
+      increaseButton: true,
     };
   }
 
@@ -27,7 +28,7 @@ export default class ShoppingCart extends Component {
   //   }
   // }
 
-  handlePlus = (id) => {
+  handleIncrease = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
 
@@ -73,6 +74,9 @@ export default class ShoppingCart extends Component {
 
   render() {
     const { shopcart } = this.state;
+    const { available_quantity } = shopcart
+    const quant = document.querySelector('#quantity');
+    const btn = document.querySelector('#increase');
 
     if (!shopcart.length) {
       return (
@@ -90,11 +94,11 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { shopcart.map(({ title, count, id, price, totalValue }) => (
+        { shopcart.map(({ title, count, id, price, totalValue, available_quantity }) => (
           <div key={ id }>
             <div>
               <h4 data-testid="shopping-cart-product-name">{ title }</h4>
-              <p data-testid="shopping-cart-product-quantity">
+              <p id="quantity" data-testid="shopping-cart-product-quantity">
                 Quantidade:
                 { count }
               </p>
@@ -107,9 +111,10 @@ export default class ShoppingCart extends Component {
                 { (totalValue === 0) ? price : totalValue }
               </p>
               <button
+                id="increase"
                 type="button"
                 value={ id }
-                onClick={ () => this.handlePlus(id) }
+                onClick={ () => this.handleIncrease(id) }
                 data-testid="product-increase-quantity"
               >
                 +
