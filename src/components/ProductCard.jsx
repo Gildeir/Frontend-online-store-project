@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 export default class ProductCard extends Component {
   render() {
     const { product } = this.props;
-    const { id, title, thumbnail, price, shipping: { free_shipping } } = product;
+    // const { id, title, thumbnail, price, shipping: { free_shipping } } = product;
+    const { id, title, thumbnail, price } = product;
 
     return (
       <div data-testid="product">

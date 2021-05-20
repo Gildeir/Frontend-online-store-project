@@ -10,11 +10,13 @@ export default class ShoppingCart extends Component {
 
     this.state = {
       shopcart: cart,
+      totalSum: 0,
     };
   }
 
   componentDidMount() {
     // this.restoreFromLocalStorage();
+    this.totalSumProducts();
   }
 
   // restoreFromLocalStorage = () => {
@@ -26,6 +28,14 @@ export default class ShoppingCart extends Component {
   //     });
   //   }
   // }
+
+  totalSumProducts = () => {
+    const { shopcart } = this.state;
+    const val = shopcart.reduce((acc, value) => acc + value.totalValue, 0);
+    this.setState({
+      totalSum: val,
+    });
+  }
 
   handlePlus = (id) => {
     const { location: { state } } = this.props;
@@ -40,6 +50,7 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: productCart,
     });
+    this.totalSumProducts();
     // localStorage.setItem('shopcart', JSON.stringify(productCart));
   }
 
@@ -57,6 +68,7 @@ export default class ShoppingCart extends Component {
       this.setState({
         shopcart: productCart,
       });
+      this.totalSumProducts();
       // localStorage.setItem('shopcart', JSON.stringify(productCart));
     }
   }
@@ -68,11 +80,12 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: updatedCart,
     });
+    this.totalSumProducts();
     // localStorage.setItem('shopcart', JSON.stringify(updatedCart));
   }
 
   render() {
-    const { shopcart } = this.state;
+    const { shopcart, totalSum } = this.state;
 
     if (!shopcart.length) {
       return (
@@ -141,7 +154,7 @@ export default class ShoppingCart extends Component {
           type="button"
         >
           <Link
-            to={ { pathname: '/checkout', state: { shopcart } } }
+            to={ { pathname: '/checkout', state: { shopcart, totalSum } } }
             data-testid="checkout-products"
           >
             Finalizar a compra
