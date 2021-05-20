@@ -13,6 +13,20 @@ export default class ShoppingCart extends Component {
     };
   }
 
+  componentDidMount() {
+    // this.restoreFromLocalStorage();
+  }
+
+  // restoreFromLocalStorage = () => {
+  //   let localStorageShopcart = localStorage.getItem('shopcart');
+  //   if (localStorageShopcart) {
+  //     localStorageShopcart = JSON.parse(localStorageShopcart);
+  //     this.setState({
+  //       shopcart: localStorageShopcart,
+  //     });
+  //   }
+  // }
+
   handlePlus = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
@@ -26,6 +40,7 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: productCart,
     });
+    // localStorage.setItem('shopcart', JSON.stringify(productCart));
   }
 
   handleDecrease = (id) => {
@@ -42,6 +57,7 @@ export default class ShoppingCart extends Component {
       this.setState({
         shopcart: productCart,
       });
+      // localStorage.setItem('shopcart', JSON.stringify(productCart));
     }
   }
 
@@ -52,6 +68,7 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: updatedCart,
     });
+    // localStorage.setItem('shopcart', JSON.stringify(updatedCart));
   }
 
   render() {
@@ -82,11 +99,11 @@ export default class ShoppingCart extends Component {
                 { count }
               </p>
               <p>
-                Valor Unit:
+                Preço R$:
                 { price }
               </p>
               <p>
-                Valor Total:
+                Total R$:
                 { (totalValue === 0) ? price : totalValue }
               </p>
               <button
@@ -120,11 +137,13 @@ export default class ShoppingCart extends Component {
             Voltar
           </Link>
         </button>
-        <button 
-          type="button" 
-          data-testid="checkout-products"
+        <button
+          type="button"
         >
-          <Link to={ { pathname: '/checkout', state: { shopcart } } }>
+          <Link
+            to={ { pathname: '/checkout', state: { shopcart } } }
+            data-testid="checkout-products"
+          >
             Finalizar a compra
           </Link>
         </button>

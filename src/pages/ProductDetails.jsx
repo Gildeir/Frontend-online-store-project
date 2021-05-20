@@ -33,7 +33,7 @@ export default class ProductDetails extends Component {
     const haveCart = cart.length;
     if (!haveCart) {
       const { id, title, price, thumbnail } = product;
-      const productCart = [{ id, title, price, thumbnail, count: 1 }];
+      const productCart = [{ id, title, price, thumbnail, count: 1, totalValue: price }];
       this.setState({
         cart: productCart,
       });
@@ -48,7 +48,7 @@ export default class ProductDetails extends Component {
         });
       } else {
         const { id, title, price, thumbnail } = product;
-        productCart = [...productCart, { id, title, price, thumbnail, count: 1 }];
+        productCart = [...productCart, { id, title, price, thumbnail, count: 1, totalValue: price }];
         this.setState({
           cart: productCart,
         });

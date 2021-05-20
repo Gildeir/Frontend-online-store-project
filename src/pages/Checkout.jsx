@@ -33,17 +33,17 @@ export default class Checkout extends Component {
             data-testid="checkout-email"
           />
           <input
-            type="number"
+            type="text"
             placeholder="CPF"
             data-testid="checkout-cpf"
           />
           <input
-            type="number"
+            type="text"
             placeholder="Telefone"
             data-testid="checkout-phone"
           />
           <input
-            type="number"
+            type="text"
             placeholder="CEP"
             data-testid="checkout-cep"
           />
