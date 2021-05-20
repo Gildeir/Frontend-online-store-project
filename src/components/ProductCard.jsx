@@ -11,7 +11,7 @@ export default class ProductCard extends Component {
       return (
         <div data-testid="product">
           <h3>{ title }</h3>
-          <p>Produto com frete grátis</p>
+          <p data-testid="free-shipping">Produto com frete grátis</p>
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
           <Link
