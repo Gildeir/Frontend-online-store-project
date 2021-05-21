@@ -84,7 +84,10 @@ export default class ProductDetails extends Component {
           </button>
           <h3 data-testid="product-detail-name">{title}</h3>
           <img src={ thumbnail } alt={ title } />
-          <h2>{`Preço: R$ ${price}`}</h2>
+          <h2>
+            {`Preço: R$ 
+            ${price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`}
+          </h2>
         </div>
         <button
           type="button"
