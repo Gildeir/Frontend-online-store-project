@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ElementsCard from '../components/ElementsCard';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -10,12 +9,35 @@ export default class ShoppingCart extends Component {
     const { cart } = state;
 
     this.state = {
-      quantity: 0,
       shopcart: cart,
+      totalSum: 0,
     };
   }
 
-  handlePlus = (id) => {
+  componentDidMount() {
+    // this.restoreFromLocalStorage();
+    this.totalSumProducts();
+  }
+
+  // restoreFromLocalStorage = () => {
+  //   let localStorageShopcart = localStorage.getItem('shopcart');
+  //   if (localStorageShopcart) {
+  //     localStorageShopcart = JSON.parse(localStorageShopcart);
+  //     this.setState({
+  //       shopcart: localStorageShopcart,
+  //     });
+  //   }
+  // }
+
+  totalSumProducts = () => {
+    const { shopcart } = this.state;
+    const val = shopcart.reduce((acc, value) => acc + value.totalValue, 0);
+    this.setState({
+      totalSum: val,
+    });
+  }
+
+  handleIncrease = (id) => {
     const { location: { state } } = this.props;
     const { cart } = state;
 
@@ -23,10 +45,13 @@ export default class ShoppingCart extends Component {
     const findProduct = productCart.find((data) => data.id === id);
     const key = productCart.indexOf(findProduct);
     productCart[key].count += 1;
+    productCart[key].totalValue = Math.round((productCart[key].count
+    * productCart[key].price) * 100) / 100;
     this.setState({
-      quantity: productCart[key].count,
+      shopcart: productCart,
     });
-    this.usingQuantity();
+    this.totalSumProducts();
+    // localStorage.setItem('shopcart', JSON.stringify(productCart));
   }
 
   handleDecrease = (id) => {
@@ -38,10 +63,13 @@ export default class ShoppingCart extends Component {
     const key = productCart.indexOf(findProduct);
     if (productCart[key].count > 1) {
       productCart[key].count -= 1;
+      productCart[key].totalValue = Math.round((productCart[key].count
+      * productCart[key].price) * 100) / 100;
       this.setState({
-        quantity: productCart[key].count,
+        shopcart: productCart,
       });
-      this.usingQuantity();
+      this.totalSumProducts();
+      // localStorage.setItem('shopcart', JSON.stringify(productCart));
     }
   }
 
@@ -52,16 +80,12 @@ export default class ShoppingCart extends Component {
     this.setState({
       shopcart: updatedCart,
     });
-  }
-
-  usingQuantity = () => {
-    const { quantity } = this.state;
-    const quantityState = quantity;
-    console.log(quantityState);
+    this.totalSumProducts();
+    // localStorage.setItem('shopcart', JSON.stringify(updatedCart));
   }
 
   render() {
-    const { shopcart } = this.state;
+    const { shopcart, totalSum } = this.state;
 
     if (!shopcart.length) {
       return (
@@ -79,19 +103,63 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h3>Carrinho de Compras</h3>
-        { shopcart.map((Cart) => (
-          <div key={ Cart.id }>
-            <ElementsCard
-              data={ Cart }
-              handlePlus={ this.handlePlus }
-              handleDecrease={ this.handleDecrease }
-              handleRemove={ this.handleRemove }
-            />
+        { shopcart.map(({ title, count, id, price, totalValue, availableQuantity }) => (
+          <div key={ id }>
+            <div>
+              <h4 data-testid="shopping-cart-product-name">{ title }</h4>
+              <p data-testid="shopping-cart-product-quantity">
+                Quantidade:
+                { count }
+              </p>
+              <p>
+                Preço R$:
+                { price }
+              </p>
+              <p>
+                Total R$:
+                { (totalValue === 0) ? price : totalValue }
+              </p>
+              <button
+                id="increase"
+                disabled={ count >= availableQuantity }
+                type="button"
+                value={ id }
+                onClick={ () => this.handleIncrease(id) }
+                data-testid="product-increase-quantity"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                value={ id }
+                onClick={ () => this.handleDecrease(id) }
+                data-testid="product-decrease-quantity"
+              >
+                -
+              </button>
+              <button
+                type="button"
+                value={ id }
+                onClick={ () => this.handleRemove(id) }
+              >
+                X
+              </button>
+            </div>
           </div>
         ))}
         <button type="button">
           <Link to="/">
             Voltar
+          </Link>
+        </button>
+        <button
+          type="button"
+        >
+          <Link
+            to={ { pathname: '/checkout', state: { shopcart, totalSum } } }
+            data-testid="checkout-products"
+          >
+            Finalizar a compra
           </Link>
         </button>
       </div>

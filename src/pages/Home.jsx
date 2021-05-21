@@ -51,30 +51,51 @@ export default class Home extends Component {
     });
   }
 
+  // saveLocalStorage = (productCart) => {
+  //   let localStorageShopcart = localStorage.getItem('shopcart');
+  //   if (localStorageShopcart) {
+  //     localStorageShopcart = JSON.parse(localStorageShopcart);
+  //     const saveLocalStorage = [...localStorageShopcart, productCart];
+  //     localStorage.setItem('shopcart', JSON.stringify(saveLocalStorage));
+  //   } else {
+  //     localStorage.setItem('shopcart', JSON.stringify(productCart));
+  //   }
+  // }
+
   handleClickAddCart = (product) => {
     const { cart } = this.state;
     const haveCart = cart.length;
     if (!haveCart) {
-      const { id, title } = product;
-      const productCart = [{ id, title, count: 1 }];
+      const { id, title, price, thumbnail } = product;
+      const availableQuantity = product.available_quantity;
+      const productCart = [
+        { id, title, price, thumbnail, availableQuantity, count: 1, totalValue: price },
+      ];
       this.setState({
         cart: productCart,
       });
+      // this.saveLocalStorage(productCart);
     } else {
       let productCart = cart;
       const findProduct = productCart.find((data) => data.id === product.id);
       if (findProduct) {
         const key = productCart.indexOf(findProduct);
         productCart[key].count += 1;
+        productCart[key].totalValue = Math.round((productCart[key].count
+          * productCart[key].price) * 100) / 100;
         this.setState({
           cart: productCart,
         });
       } else {
-        const { id, title } = product;
-        productCart = [...productCart, { id, title, count: 1 }];
+        const { id, title, price, thumbnail } = product;
+        const availableQuantity = product.available_quantity;
+        productCart = [...productCart,
+          { id, title, price, thumbnail, availableQuantity, count: 1, totalValue: price },
+        ];
         this.setState({
           cart: productCart,
         });
+        // this.saveLocalStorage(productCart);
       }
     }
   }
