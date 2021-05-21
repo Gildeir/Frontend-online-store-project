@@ -113,11 +113,15 @@ export default class ShoppingCart extends Component {
               </p>
               <p>
                 Preço R$:
-                { price }
+                { price.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }
               </p>
               <p>
                 Total R$:
-                { (totalValue === 0) ? price : totalValue }
+                {
+                  (totalValue === 0)
+                    ? price : totalValue
+                      .toLocaleString('pt-br', { minimumFractionDigits: 2 })
+                }
               </p>
               <button
                 id="increase"

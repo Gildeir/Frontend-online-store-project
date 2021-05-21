@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FormCheckout from '../components/FormCheckout';
 
 export default class Checkout extends Component {
   render() {
@@ -15,71 +16,22 @@ export default class Checkout extends Component {
             <img src={ thumbnail } alt={ title } />
             <p>{ title }</p>
             <p>{ `Quantidade: ${count}` }</p>
-            <p>{ `Preço R$: ${totalValue}` }</p>
+            <p>
+              { `Preço R$:
+              ${totalValue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`}
+            </p>
           </div>
         )) }
         <p>
           <strong>
-            { `VALOR TOTAL DO PRODUTOS: R$ ${totalSum}` }
+            {
+              `VALOR TOTAL DO PRODUTOS:
+              R$ ${totalSum.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`
+            }
           </strong>
         </p>
         <br />
-        <h2>Informações do comprador</h2>
-        <form>
-          <input
-            type="text"
-            placeholder="Nome Completo"
-            data-testid="checkout-fullname"
-          />
-          <input
-            type="email"
-            placeholder="E-mail"
-            data-testid="checkout-email"
-          />
-          <input
-            type="text"
-            placeholder="CPF"
-            data-testid="checkout-cpf"
-          />
-          <input
-            type="text"
-            placeholder="Telefone"
-            data-testid="checkout-phone"
-          />
-          <input
-            type="text"
-            placeholder="CEP"
-            data-testid="checkout-cep"
-          />
-          <input
-            type="text"
-            placeholder="Endereço"
-            data-testid="checkout-address"
-          />
-          <form>
-            <p>Boleto</p>
-            <input
-              type="radio"
-              name="boleto"
-            />
-            Boleto
-            <input
-              type="radio"
-              name="cartao"
-            />
-            Visa
-            <input
-              type="radio"
-              name="cartao"
-            />
-            MasterCard
-            <input
-              type="radio"
-              name="cartao"
-            />
-            Elo
-          </form>
-        </form>
+        <FormCheckout />
         <button
           type="button"
         >
