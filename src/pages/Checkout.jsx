@@ -50,7 +50,7 @@ Checkout.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       shopcart: PropTypes.arrayOf(PropTypes.object).isRequired,
-      totalSum: PropTypes.arrayOf(PropTypes.object).isRequired,
+      totalSum: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
 };

@@ -14,12 +14,14 @@ export default class ProductCard extends Component {
           <p data-testid="free-shipping">Produto com frete grátis</p>
           <img src={ thumbnail } alt={ title } />
           <p>{ `R$${price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }</p>
-          <Link
-            data-testid="product-detail-link"
-            to={ { pathname: `/details/${id}`, state: { product } } }
-          >
-            VER DETALHES
-          </Link>
+          <button type="button">
+            <Link
+              data-testid="product-detail-link"
+              to={ { pathname: `/details/${id}`, state: { product } } }
+            >
+              Ver Detalhes
+            </Link>
+          </button>
         </div>
       );
     }
@@ -29,12 +31,14 @@ export default class ProductCard extends Component {
         <h3>{ title }</h3>
         <img src={ thumbnail } alt={ title } />
         <p>{ `R$${price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }</p>
-        <Link
-          data-testid="product-detail-link"
-          to={ { pathname: `/details/${id}`, state: { product } } }
-        >
-          VER DETALHES
-        </Link>
+        <button type="button">
+          <Link
+            data-testid="product-detail-link"
+            to={ { pathname: `/details/${id}`, state: { product } } }
+          >
+            Ver Detalhes
+          </Link>
+        </button>
       </div>
     );
   }

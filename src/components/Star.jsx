@@ -11,5 +11,5 @@ export default class Star extends Component {
 }
 
 Star.propTypes = {
-  fill: PropTypes.func.isRequired,
+  fill: PropTypes.string.isRequired,
 };

@@ -12,7 +12,6 @@ export default class ProductDetails extends Component {
       coments: [],
       cart: [],
     };
-    this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
   }
 
   // Comments:
@@ -40,6 +39,7 @@ export default class ProductDetails extends Component {
       this.setState({
         cart: productCart,
       });
+      localStorage.setItem('shopcart', JSON.stringify(productCart));
     } else {
       let productCart = cart;
       const findProduct = productCart.find((data) => data.id === product.id);
@@ -51,6 +51,7 @@ export default class ProductDetails extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       } else {
         const { id, title, price, thumbnail } = product;
         const availableQuantity = product.available_quantity;
@@ -60,6 +61,7 @@ export default class ProductDetails extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       }
     }
   }

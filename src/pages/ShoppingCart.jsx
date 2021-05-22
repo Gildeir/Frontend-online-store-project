@@ -15,19 +15,19 @@ export default class ShoppingCart extends Component {
   }
 
   componentDidMount() {
-    // this.restoreFromLocalStorage();
+    this.restoreFromLocalStorage();
     this.totalSumProducts();
   }
 
-  // restoreFromLocalStorage = () => {
-  //   let localStorageShopcart = localStorage.getItem('shopcart');
-  //   if (localStorageShopcart) {
-  //     localStorageShopcart = JSON.parse(localStorageShopcart);
-  //     this.setState({
-  //       shopcart: localStorageShopcart,
-  //     });
-  //   }
-  // }
+  restoreFromLocalStorage = () => {
+    let localStorageShopcart = localStorage.getItem('shopcart');
+    if (localStorageShopcart) {
+      localStorageShopcart = JSON.parse(localStorageShopcart);
+      this.setState({
+        shopcart: localStorageShopcart,
+      });
+    }
+  }
 
   totalSumProducts = () => {
     const { shopcart } = this.state;
@@ -51,7 +51,7 @@ export default class ShoppingCart extends Component {
       shopcart: productCart,
     });
     this.totalSumProducts();
-    // localStorage.setItem('shopcart', JSON.stringify(productCart));
+    localStorage.setItem('shopcart', JSON.stringify(productCart));
   }
 
   handleDecrease = (id) => {
@@ -69,7 +69,7 @@ export default class ShoppingCart extends Component {
         shopcart: productCart,
       });
       this.totalSumProducts();
-      // localStorage.setItem('shopcart', JSON.stringify(productCart));
+      localStorage.setItem('shopcart', JSON.stringify(productCart));
     }
   }
 
@@ -81,7 +81,15 @@ export default class ShoppingCart extends Component {
       shopcart: updatedCart,
     });
     this.totalSumProducts();
-    // localStorage.setItem('shopcart', JSON.stringify(updatedCart));
+    localStorage.setItem('shopcart', JSON.stringify(updatedCart));
+  }
+
+  clearProducts = () => {
+    const updatedCart = [];
+    this.setState({
+      shopcart: updatedCart,
+    });
+    localStorage.setItem('shopcart', JSON.stringify(updatedCart));
   }
 
   render() {
@@ -116,12 +124,14 @@ export default class ShoppingCart extends Component {
                 { price.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }
               </p>
               <p>
-                Total R$:
-                {
-                  (totalValue === 0)
-                    ? price : totalValue
-                      .toLocaleString('pt-br', { minimumFractionDigits: 2 })
-                }
+                <strong>
+                  Total R$:
+                  {
+                    (totalValue === 0)
+                      ? price : totalValue
+                        .toLocaleString('pt-br', { minimumFractionDigits: 2 })
+                  }
+                </strong>
               </p>
               <button
                 id="increase"
@@ -155,6 +165,12 @@ export default class ShoppingCart extends Component {
           <Link to="/">
             Voltar
           </Link>
+        </button>
+        <button
+          type="button"
+          onClick={ this.clearProducts }
+        >
+          Limpar Produtos
         </button>
         <button
           type="button"
