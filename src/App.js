@@ -9,7 +9,10 @@ import Checkout from './pages/Checkout';
 function App() {
   return (
     <div>
-      <header>
+      <header className="header">
+        <h1>FrontEnd Online Store</h1>
+      </header>
+      <div>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ Home } />
@@ -19,7 +22,7 @@ function App() {
             {/* <Route component={ NotFound } /> */}
           </Switch>
         </BrowserRouter>
-      </header>
+      </div>
     </div>
   );
 }

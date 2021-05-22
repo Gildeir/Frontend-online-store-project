@@ -38,8 +38,6 @@ export default class ShoppingCart extends Component {
   }
 
   handleIncrease = (id) => {
-    // const { location: { state } } = this.props;
-    // const { cart } = state;
     const { shopcart } = this.state;
 
     const productCart = shopcart;
@@ -56,8 +54,6 @@ export default class ShoppingCart extends Component {
   }
 
   handleDecrease = (id) => {
-    // const { location: { state } } = this.props;
-    // const { cart } = state;
     const { shopcart } = this.state;
 
     const productCart = shopcart;
@@ -115,51 +111,55 @@ export default class ShoppingCart extends Component {
         <h3>Carrinho de Compras</h3>
         { shopcart.map(({ title, count, id, price, totalValue, availableQuantity }) => (
           <div key={ id }>
-            <div>
+            <div className="item">
               <h4 data-testid="shopping-cart-product-name">{ title }</h4>
-              <p data-testid="shopping-cart-product-quantity">
-                Quantidade:
-                { count }
-              </p>
-              <p>
-                Preço R$:
-                { price.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }
-              </p>
-              <p>
-                <strong>
-                  Total R$:
-                  {
-                    (totalValue === 0)
-                      ? price : totalValue
-                        .toLocaleString('pt-br', { minimumFractionDigits: 2 })
-                  }
-                </strong>
-              </p>
-              <button
-                id="increase"
-                disabled={ count >= availableQuantity }
-                type="button"
-                value={ id }
-                onClick={ () => this.handleIncrease(id) }
-                data-testid="product-increase-quantity"
-              >
-                +
-              </button>
-              <button
-                type="button"
-                value={ id }
-                onClick={ () => this.handleDecrease(id) }
-                data-testid="product-decrease-quantity"
-              >
-                -
-              </button>
-              <button
-                type="button"
-                value={ id }
-                onClick={ () => this.handleRemove(id) }
-              >
-                X
-              </button>
+              <div className="centerCart">
+                <p data-testid="shopping-cart-product-quantity">
+                  Quantidade:
+                  { count }
+                </p>
+                <p>
+                  Preço R$:
+                  { price.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }
+                </p>
+                <p>
+                  <strong>
+                    Total R$:
+                    {
+                      (totalValue === 0)
+                        ? price : totalValue
+                          .toLocaleString('pt-br', { minimumFractionDigits: 2 })
+                    }
+                  </strong>
+                </p>
+              </div>
+              <div className="bottomCart">
+                <button
+                  id="increase"
+                  disabled={ count >= availableQuantity }
+                  type="button"
+                  value={ id }
+                  onClick={ () => this.handleIncrease(id) }
+                  data-testid="product-increase-quantity"
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  value={ id }
+                  onClick={ () => this.handleDecrease(id) }
+                  data-testid="product-decrease-quantity"
+                >
+                  -
+                </button>
+                <button
+                  type="button"
+                  value={ id }
+                  onClick={ () => this.handleRemove(id) }
+                >
+                  X
+                </button>
+              </div>
             </div>
           </div>
         ))}

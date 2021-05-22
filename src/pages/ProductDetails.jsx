@@ -14,6 +14,10 @@ export default class ProductDetails extends Component {
     };
   }
 
+  componentDidMount() {
+    this.restoreFromLocalStorage();
+  }
+
   // Comments:
   handleComents = (newComents) => {
     this.setState({ newComent: newComents });
@@ -24,6 +28,16 @@ export default class ProductDetails extends Component {
 
   handleAddComents = () => {
     this.setState(({ newComent, coments }) => ({ coments: [...coments, newComent] }));
+  }
+
+  restoreFromLocalStorage = () => {
+    let localStorageShopcart = localStorage.getItem('shopcart');
+    if (localStorageShopcart) {
+      localStorageShopcart = JSON.parse(localStorageShopcart);
+      this.setState({
+        cart: localStorageShopcart,
+      });
+    }
   }
 
   // Add product to cart:

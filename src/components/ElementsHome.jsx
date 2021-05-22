@@ -7,18 +7,20 @@ export default class ElementsHome extends Component {
   render() {
     const { products, handleChange, handleClick, handleClickAddCart, cart } = this.props;
     return (
-      <div>
+      <div className="container">
         <input
+          className="inputSearch"
           type="text"
           data-testid="query-input"
           onChange={ handleChange }
         />
         <button
+          className="buttonSearch"
           type="button"
           data-testid="query-button"
           onClick={ handleClick }
         >
-          PESQUISAR
+          <img src="https://www.freeiconspng.com/uploads/search-icon-png-15.png" alt="cart icon" height="25px" />
         </button>
         <button type="button">
           <Link
