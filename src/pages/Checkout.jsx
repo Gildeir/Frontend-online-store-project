@@ -16,12 +16,18 @@ export default class Checkout extends Component {
             <img src={ thumbnail } alt={ title } />
             <p>{ title }</p>
             <p>{ `Quantidade: ${count}` }</p>
-            <p>{ `Preço R$: ${totalValue}` }</p>
+            <p>
+              { `Preço R$:
+              ${totalValue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`}
+            </p>
           </div>
         )) }
         <p>
           <strong>
-            { `VALOR TOTAL DO PRODUTOS: R$ ${totalSum}` }
+            {
+              `VALOR TOTAL DO PRODUTOS:
+              R$ ${totalSum.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`
+            }
           </strong>
         </p>
         <br />
@@ -44,7 +50,7 @@ Checkout.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       shopcart: PropTypes.arrayOf(PropTypes.object).isRequired,
-      totalSum: PropTypes.arrayOf(PropTypes.object).isRequired,
+      totalSum: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
 };

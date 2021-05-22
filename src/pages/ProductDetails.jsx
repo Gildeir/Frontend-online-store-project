@@ -12,7 +12,6 @@ export default class ProductDetails extends Component {
       coments: [],
       cart: [],
     };
-    this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
   }
 
   // Comments:
@@ -40,6 +39,7 @@ export default class ProductDetails extends Component {
       this.setState({
         cart: productCart,
       });
+      localStorage.setItem('shopcart', JSON.stringify(productCart));
     } else {
       let productCart = cart;
       const findProduct = productCart.find((data) => data.id === product.id);
@@ -51,6 +51,7 @@ export default class ProductDetails extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       } else {
         const { id, title, price, thumbnail } = product;
         const availableQuantity = product.available_quantity;
@@ -60,6 +61,7 @@ export default class ProductDetails extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       }
     }
   }
@@ -84,7 +86,10 @@ export default class ProductDetails extends Component {
           </button>
           <h3 data-testid="product-detail-name">{title}</h3>
           <img src={ thumbnail } alt={ title } />
-          <h2>{`Preço: R$ ${price}`}</h2>
+          <h2>
+            {`Preço: R$ 
+            ${price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`}
+          </h2>
         </div>
         <button
           type="button"

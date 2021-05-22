@@ -14,8 +14,10 @@ export default class Home extends Component {
       cart: [],
       foo: false,
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChangeCategory = this.handleChangeCategory.bind(this);
+  }
+
+  componentDidMount() {
+    this.restoreFromLocalStorage();
   }
 
   componentDidUpdate() {
@@ -36,14 +38,14 @@ export default class Home extends Component {
     });
   }
 
-  handleChangeCategory({ target: { id } }) {
+  handleChangeCategory = ({ target: { id } }) => {
     this.setState({
       category: id,
       foo: false,
     });
   }
 
-  async handleClick() {
+  handleClick = async () => {
     const { searchField, category } = this.state;
     const response = await api.getProductsFromCategoryAndQuery(category, searchField);
     this.setState({
@@ -51,16 +53,15 @@ export default class Home extends Component {
     });
   }
 
-  // saveLocalStorage = (productCart) => {
-  //   let localStorageShopcart = localStorage.getItem('shopcart');
-  //   if (localStorageShopcart) {
-  //     localStorageShopcart = JSON.parse(localStorageShopcart);
-  //     const saveLocalStorage = [...localStorageShopcart, productCart];
-  //     localStorage.setItem('shopcart', JSON.stringify(saveLocalStorage));
-  //   } else {
-  //     localStorage.setItem('shopcart', JSON.stringify(productCart));
-  //   }
-  // }
+  restoreFromLocalStorage = () => {
+    let localStorageShopcart = localStorage.getItem('shopcart');
+    if (localStorageShopcart) {
+      localStorageShopcart = JSON.parse(localStorageShopcart);
+      this.setState({
+        cart: localStorageShopcart,
+      });
+    }
+  }
 
   handleClickAddCart = (product) => {
     const { cart } = this.state;
@@ -74,7 +75,7 @@ export default class Home extends Component {
       this.setState({
         cart: productCart,
       });
-      // this.saveLocalStorage(productCart);
+      localStorage.setItem('shopcart', JSON.stringify(productCart));
     } else {
       let productCart = cart;
       const findProduct = productCart.find((data) => data.id === product.id);
@@ -86,6 +87,7 @@ export default class Home extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       } else {
         const { id, title, price, thumbnail } = product;
         const availableQuantity = product.available_quantity;
@@ -95,7 +97,7 @@ export default class Home extends Component {
         this.setState({
           cart: productCart,
         });
-        // this.saveLocalStorage(productCart);
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       }
     }
   }
