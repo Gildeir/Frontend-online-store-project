@@ -38,10 +38,11 @@ export default class ShoppingCart extends Component {
   }
 
   handleIncrease = (id) => {
-    const { location: { state } } = this.props;
-    const { cart } = state;
+    // const { location: { state } } = this.props;
+    // const { cart } = state;
+    const { shopcart } = this.state;
 
-    const productCart = cart;
+    const productCart = shopcart;
     const findProduct = productCart.find((data) => data.id === id);
     const key = productCart.indexOf(findProduct);
     productCart[key].count += 1;
@@ -55,10 +56,11 @@ export default class ShoppingCart extends Component {
   }
 
   handleDecrease = (id) => {
-    const { location: { state } } = this.props;
-    const { cart } = state;
+    // const { location: { state } } = this.props;
+    // const { cart } = state;
+    const { shopcart } = this.state;
 
-    const productCart = cart;
+    const productCart = shopcart;
     const findProduct = productCart.find((data) => data.id === id);
     const key = productCart.indexOf(findProduct);
     if (productCart[key].count > 1) {
