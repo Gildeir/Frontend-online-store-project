@@ -13,7 +13,7 @@ export default class Checkout extends Component {
         <h2>Resumo da Compra</h2>
         { shopcart.map(({ id, thumbnail, title, totalValue, count }) => (
           <div key={ id }>
-            <img src={ thumbnail } alt={ title } />
+            <img src={ thumbnail } alt={ title } className="item-img" />
             <p>{ title }</p>
             <p>{ `Quantidade: ${count}` }</p>
             <p>
